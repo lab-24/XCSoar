@@ -2,18 +2,18 @@
 #include "Airspaces.hpp"
 #include "AbstractAirspace.hpp"
 
-void 
+void
 AirspaceNearestSort::populate_queue(const Airspaces &airspaces,
                                     const fixed range)
 {
-  AirspacesInterface::AirspaceVector vectors = 
+  AirspacesInterface::AirspaceVector vectors =
     airspaces.ScanRange(m_location,
-                         range,
-                         m_condition);
+                        range,
+                        m_condition);
 
   for (const Airspace &airspace : vectors) {
     const AbstractAirspace *as = airspace.GetAirspace();
-    if (as != NULL) {
+    if (as != nullptr) {
       const AirspaceInterceptSolution ais =
         solve_intercept(*as, airspaces.GetProjection());
       const fixed value = metric(ais);
@@ -24,7 +24,6 @@ AirspaceNearestSort::populate_queue(const Airspaces &airspaces,
     }
   }
 }
-
 
 AirspaceInterceptSolution
 AirspaceNearestSort::solve_intercept(const AbstractAirspace &a,
@@ -40,14 +39,13 @@ AirspaceNearestSort::solve_intercept(const AbstractAirspace &a,
   }
 }
 
-fixed 
+fixed
 AirspaceNearestSort::metric(const AirspaceInterceptSolution& sol) const
 {
   return sol.distance;
 }
 
-
-const AbstractAirspace*
+const AbstractAirspace *
 AirspaceNearestSort::find_nearest(const Airspaces &airspaces,
                                   const fixed range)
 {
@@ -56,6 +54,6 @@ AirspaceNearestSort::find_nearest(const Airspaces &airspaces,
   if (!m_q.empty()) {
     return m_q.top().second.second;
   } else {
-    return NULL;
+    return nullptr;
   }
 }

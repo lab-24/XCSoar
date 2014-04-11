@@ -149,17 +149,17 @@ devStartup()
 void
 VarioWriteNMEA(const TCHAR *text, OperationEnvironment &env)
 {
-  for (unsigned i = 0; i < NUMDEV; i++)
-    if (device_list[i]->IsVega())
-      device_list[i]->WriteNMEA(text, env);
+  for (DeviceDescriptor *i : device_list)
+    if (i->IsVega())
+      i->WriteNMEA(text, env);
 }
 
 DeviceDescriptor *
 devVarioFindVega()
 {
-  for (unsigned i = 0; i < NUMDEV; i++)
-    if (device_list[i]->IsVega())
-      return device_list[i];
+  for (DeviceDescriptor *i : device_list)
+    if (i->IsVega())
+      return i;
 
   return NULL;
 }
@@ -170,9 +170,8 @@ devShutdown()
   // Stop COM devices
   LogFormat("Stop COM devices");
 
-  for (unsigned i = 0; i < NUMDEV; i++) {
-    device_list[i]->Close();
-  }
+  for (DeviceDescriptor *i : device_list)
+    i->Close();
 }
 
 void
