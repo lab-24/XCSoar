@@ -45,6 +45,7 @@ Copyright_License {
 #include "Device/Driver/Condor.hpp"
 #include "Device/Driver/Leonardo.hpp"
 #include "Device/Driver/Flytec.hpp"
+#include "Device/Driver/FlytecBLE.hpp"
 #include "Device/Driver/ILEC.hpp"
 #include "Device/Driver/Westerboer.hpp"
 #include "Device/Driver/WesterboerVW921.hpp"
@@ -79,6 +80,7 @@ static const struct DeviceRegister *const driver_list[] = {
   &condor_driver,
   &leonardo_driver,
   &flytec_driver,
+  &flytec_ble_driver,
   &ilec_driver,
   &westerboer_driver,
   &imi_driver,

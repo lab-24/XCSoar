@@ -38,6 +38,7 @@ Copyright_License {
 
 #ifdef ANDROID
 #include "AndroidBluetoothPort.hpp"
+#include "AndroidBLEPort.hpp"
 #include "AndroidIOIOUartPort.hpp"
 #endif
 
@@ -116,7 +117,6 @@ OpenPortInternal(const DeviceConfig &config, DataHandler &handler)
       LogFormat("No Bluetooth MAC configured");
       return NULL;
     }
-
     return OpenAndroidBluetoothPort(config.bluetooth_mac, handler);
 #else
     LogFormat("Bluetooth not available on this platform");
@@ -128,6 +128,14 @@ OpenPortInternal(const DeviceConfig &config, DataHandler &handler)
     return OpenAndroidBluetoothServerPort(handler);
 #else
     LogFormat("Bluetooth not available on this platform");
+    return NULL;
+#endif
+
+  case DeviceConfig::PortType::BLE_SERVER:
+#ifdef ANDROID
+    return OpenAndroidBLEServerPort(handler);
+#else
+    LogFormat("Bluetooth LowEnergy not available on this platform");
     return NULL;
 #endif
 

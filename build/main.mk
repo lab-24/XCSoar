@@ -699,6 +699,7 @@ XCSOAR_SOURCES += \
 	$(SRC)/Java/URL.cpp \
 	$(SRC)/Device/Port/AndroidPort.cpp \
 	$(SRC)/Device/Port/AndroidBluetoothPort.cpp \
+	$(SRC)/Device/Port/AndroidBLEPort.cpp \
 	$(SRC)/Device/Port/AndroidIOIOUartPort.cpp \
 	$(SRC)/Android/Environment.cpp \
 	$(SRC)/Android/Product.cpp \
@@ -710,6 +711,7 @@ XCSOAR_SOURCES += \
 	$(SRC)/Android/NativeInputListener.cpp \
 	$(SRC)/Android/PortBridge.cpp \
 	$(SRC)/Android/BluetoothHelper.cpp \
+	$(SRC)/Android/BLEHelper.cpp \
 	$(SRC)/Android/Battery.cpp \
 	$(SRC)/Android/DownloadManager.cpp \
 	$(SRC)/Android/Vibrator.cpp \

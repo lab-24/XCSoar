@@ -30,6 +30,7 @@ Copyright_License {
 #include "Android/InternalSensors.hpp"
 #include "Android/PortBridge.hpp"
 #include "Android/BluetoothHelper.hpp"
+#include "Android/BLEHelper.hpp"
 #include "Android/NativeInputListener.hpp"
 #include "Android/TextUtil.hpp"
 #include "Android/LogCat.hpp"
@@ -117,6 +118,7 @@ Java_org_xcsoar_NativeView_initializeNative(JNIEnv *env, jobject obj,
   NativeInputListener::Initialise(env);
   PortBridge::Initialise(env);
   BluetoothHelper::Initialise(env);
+  BLEHelper::Initialise(env);
   IOIOHelper::Initialise(env);
   NativeBMP085Listener::Initialise(env);
   BMP085Device::Initialise(env);
@@ -237,6 +239,7 @@ Java_org_xcsoar_NativeView_deinitializeNative(JNIEnv *env, jobject obj)
   NativeVoltageListener::Deinitialise(env);
   IOIOHelper::Deinitialise(env);
   BluetoothHelper::Deinitialise(env);
+  BLEHelper::Deinitialise(env);
   NativeInputListener::Deinitialise(env);
   InternalSensors::Deinitialise(env);
   Environment::Deinitialise(env);

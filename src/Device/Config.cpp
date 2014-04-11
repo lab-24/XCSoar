@@ -46,6 +46,8 @@ DeviceConfig::IsAvailable() const
   case PortType::RFCOMM:
   case PortType::RFCOMM_SERVER:
     return IsAndroid();
+  case PortType::BLE_SERVER:
+    return IsAndroid();
 
   case PortType::IOIOUART:
   case PortType::DROIDSOAR_V2:
@@ -95,6 +97,7 @@ DeviceConfig::ShouldReopenOnTimeout() const
 
   case PortType::RFCOMM:
   case PortType::RFCOMM_SERVER:
+  case PortType::BLE_SERVER:
   case PortType::IOIOUART:
   case PortType::DROIDSOAR_V2:
   case PortType::NUNCHUCK:
@@ -235,6 +238,8 @@ DeviceConfig::GetPortName(TCHAR *buffer, size_t max_size) const
 
   case PortType::RFCOMM_SERVER:
     return _("Bluetooth server");
+  case PortType::BLE_SERVER:
+    return _("Bluetooth LowEnergy server");
 
   case PortType::IOIOUART:
     StringFormat(buffer, max_size, _T("IOIO UART %d"), ioio_uart_id);

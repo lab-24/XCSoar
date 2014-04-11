@@ -388,6 +388,12 @@ struct DeviceRegister {
      * EnablePassThrough() is implemented.
      */
     PASS_THROUGH = 0x200,
+
+    /**
+     * Is this driver a Bluetooth LowEnergy Driver?
+     * used to build the driver list, if we select BLE_SERVER Port
+     */
+    BLE_DRIVER = 0x400,
   };
 
   /**
@@ -484,6 +490,13 @@ struct DeviceRegister {
    */
   bool HasPassThrough() const {
     return (flags & PASS_THROUGH) != 0;
+  }
+
+  /**
+   * Is this BLE driver?
+   */
+  bool IsBLEDriver() const {
+    return (flags & BLE_DRIVER) != 0;
   }
 };
 

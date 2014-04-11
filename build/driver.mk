@@ -68,6 +68,11 @@ FLYTEC_SOURCES = \
 	$(DRIVER_SRC_DIR)/Flytec/Parser.cpp \
 	$(DRIVER_SRC_DIR)/Flytec/Logger.cpp
 
+FLYTECBLE_SOURCES = \
+        $(DRIVER_SRC_DIR)/FlytecBLE/Register.cpp \
+        $(DRIVER_SRC_DIR)/FlytecBLE/Parser.cpp \
+        $(DRIVER_SRC_DIR)/FlytecBLE/Logger.cpp
+
 VEGA_SOURCES = \
 	$(DRIVER_SRC_DIR)/Vega/Misc.cpp \
 	$(DRIVER_SRC_DIR)/Vega/Parser.cpp \
@@ -81,6 +86,7 @@ DRIVER_SOURCES = \
 	$(LX_SOURCES) \
 	$(FLARM_SOURCES) \
 	$(FLYTEC_SOURCES) \
+	$(FLYTECBLE_SOURCES) \
 	$(VEGA_SOURCES) \
 	$(DRIVER_SRC_DIR)/AltairPro.cpp \
 	$(DRIVER_SRC_DIR)/BlueFlyVario.cpp \

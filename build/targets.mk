@@ -357,11 +357,13 @@ endif
 ifeq ($(TARGET),ANDROID)
   ANDROID_NDK ?= $(HOME)/opt/android-ndk-r9d
 
-  ANDROID_PLATFORM = android-17
+  # mg: changed API from 17 to 18 
+  ANDROID_PLATFORM = android-18
   ANDROID_SDK_PLATFORM = $(ANDROID_PLATFORM)
 
   # NDK r8b has only android-14
-  ANDROID_NDK_PLATFORM = android-14
+  # mg: changed from android-14 to android-18
+  ANDROID_NDK_PLATFORM = android-18
 
   ANDROID_ARCH = arm
   ANDROID_ABI2 = arm-linux-androideabi
@@ -552,7 +554,8 @@ endif
 ifeq ($(TARGET),ANDROID)
   TARGET_CPPFLAGS += --sysroot=$(ANDROID_TARGET_ROOT)
   TARGET_CPPFLAGS += -DANDROID
-  CXXFLAGS += -D__STDC_VERSION__=199901L
+#  mg: does not work on MacOSX 
+#  CXXFLAGS += -D__STDC_VERSION__=199901L
 
   ifeq ($(X86),y)
     # On NDK r6, the macro _BYTE_ORDER never gets defined - workaround:

@@ -98,6 +98,13 @@ public class XCSoar extends Activity {
     }
 
     try {
+        BLEServerPort.Initialize();
+        BLEHelper.Initialize(this);
+      } catch (VerifyError e) {
+        // Android < 2.0 doesn't have Bluetooth support
+      }
+
+    try {
       DownloadUtil.Initialise(this);
     } catch (VerifyError e) {
       // Android < 2.3 doesn't have the DownloadManager

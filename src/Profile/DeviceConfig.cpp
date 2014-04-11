@@ -39,6 +39,7 @@ static const char *const port_type_strings[] = {
   "serial",
   "rfcomm",
   "rfcomm_server",
+  "ble_server",
   "ioio_uart",
   "droidsoar_v2",
   "nunchuck",

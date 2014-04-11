@@ -75,6 +75,7 @@ DeviceConfigOverlaps(const DeviceConfig &a, const DeviceConfig &b)
   case DeviceConfig::PortType::INTERNAL:
   case DeviceConfig::PortType::DROIDSOAR_V2:
   case DeviceConfig::PortType::RFCOMM_SERVER:
+  case DeviceConfig::PortType::BLE_SERVER:
   case DeviceConfig::PortType::NUNCHUCK: // Who wants 2 nunchucks ??
   case DeviceConfig::PortType::IOIOVOLTAGE:
     return true;

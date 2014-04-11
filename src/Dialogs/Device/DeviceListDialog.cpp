@@ -384,7 +384,8 @@ DeviceListWidget::OnPaintItem(Canvas &canvas, const PixelRect rc, unsigned idx)
     status = buffer;
 #ifdef ANDROID
   } else if ((config.port_type == DeviceConfig::PortType::RFCOMM ||
-              config.port_type == DeviceConfig::PortType::RFCOMM_SERVER) &&
+              config.port_type == DeviceConfig::PortType::RFCOMM_SERVER ||
+              config.port_type == DeviceConfig::PortType::BLE_SERVER) &&
              !BluetoothHelper::isEnabled(Java::GetEnv())) {
     status = _("Bluetooth is disabled");
 #endif
@@ -449,7 +450,8 @@ DeviceListWidget::ReconnectCurrent()
   const DeviceConfig &config =
     CommonInterface::SetSystemSettings().devices[current];
   if ((config.port_type == DeviceConfig::PortType::RFCOMM ||
-       config.port_type == DeviceConfig::PortType::RFCOMM_SERVER) &&
+       config.port_type == DeviceConfig::PortType::RFCOMM_SERVER ||
+       config.port_type == DeviceConfig::PortType::BLE_SERVER) &&
       !BluetoothHelper::isEnabled(Java::GetEnv())) {
     ShowMessageBox(_("Bluetooth is disabled"), _("Reconnect"),
                    MB_OK | MB_ICONERROR);

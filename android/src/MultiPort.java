@@ -82,6 +82,13 @@ class MultiPort implements AndroidPort, InputListener {
     ports.add(port);
     port.setListener(this);
   }
+  
+  public boolean contains(String name) {
+	  for (AndroidPort port : ports)
+	      if (port.toString().equals(name))
+	    	  return true;
+	  return false;
+  }
 
   @Override public void setListener(InputListener _listener) {
     listener = _listener;

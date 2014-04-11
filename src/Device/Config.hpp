@@ -56,6 +56,11 @@ struct DeviceConfig {
     RFCOMM_SERVER,
 
     /**
+     * Listen for incoming Bluetooth LowEnergy connections.
+     */
+    BLE_SERVER,
+
+    /**
      * Android IOIO UArt device
      */
     IOIOUART,
@@ -275,6 +280,7 @@ struct DeviceConfig {
   static bool UsesDriver(PortType port_type) {
     return port_type == PortType::SERIAL || port_type == PortType::RFCOMM ||
       port_type == PortType::RFCOMM_SERVER ||
+      port_type == PortType::BLE_SERVER ||
       port_type == PortType::AUTO || port_type == PortType::TCP_LISTENER ||
       port_type == PortType::TCP_CLIENT ||
       port_type == PortType::IOIOUART || port_type == PortType::PTY ||

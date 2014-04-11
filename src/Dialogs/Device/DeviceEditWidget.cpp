@@ -73,6 +73,7 @@ static constexpr struct {
 #endif
 #ifdef ANDROID
   { DeviceConfig::PortType::RFCOMM_SERVER, N_("Bluetooth server") },
+  { DeviceConfig::PortType::BLE_SERVER, N_("Bluetooth LowEnergy server") },
   { DeviceConfig::PortType::DROIDSOAR_V2, _T("DroidSoar V2") },
 #ifndef NDEBUG
   { DeviceConfig::PortType::NUNCHUCK, N_("IOIO switches and Nunchuk") },
@@ -363,6 +364,8 @@ SetPort(DataFieldEnum &df, const DeviceConfig &config)
   case DeviceConfig::PortType::UDP_LISTENER:
   case DeviceConfig::PortType::PTY:
   case DeviceConfig::PortType::RFCOMM_SERVER:
+    break;
+  case DeviceConfig::PortType::BLE_SERVER:
     break;
 
   case DeviceConfig::PortType::SERIAL:
@@ -690,7 +693,12 @@ FinishPortField(DeviceConfig &config, const DataFieldEnum &df)
 
     config.port_type = new_type;
     return true;
+  case DeviceConfig::PortType::BLE_SERVER:
+    if (new_type == config.port_type)
+      return false;
 
+    config.port_type = new_type;
+    return true;
   case DeviceConfig::PortType::SERIAL:
   case DeviceConfig::PortType::PTY:
     /* Serial Port */
