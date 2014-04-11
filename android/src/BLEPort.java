@@ -101,12 +101,6 @@ class BLEPort extends AbstractMemoryPort implements Runnable {
                 case ACTION_SEND_INFO:
                 	sendInfo();
                     break;
-                	Bundle recBundle = msg.getData();
-                    if (recBundle != null) {
-                        byte[] data = recBundle.getByteArray(BUNDLE_DATA);
-                        Log.d(TAG, ByteArrayToString(data));
-                    }
-                    break;
 
                 default:
                     break;
