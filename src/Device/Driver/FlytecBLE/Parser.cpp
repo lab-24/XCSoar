@@ -31,42 +31,27 @@ Copyright_License {
 #include "Atmosphere/Temperature.hpp"
 #include "LogFile.hpp"
 
-/**
- * Parse a "$BRSF" sentence.
- *
- * Example: "$BRSF,063,-013,-0035,1,193,00351,535,485*38"
- */
-//static bool
-//FlytecParseInfo(NMEAInputLine &line)
-//{
-//
-//  line.Skip(1);
-//  // 0 = indicated or true airspeed [km/h]
-//  if (line.ReadCompare("SensBox")) {
-//    return true;
-//  }
-//
-//  return false;
-//}
-
-
-
-/**
- * Parse a "$FLYSEN" sentence.
- *
- * @see http://www.flytec.ch/public/Special%20NMEA%20sentence.pdf
- */
 bool
-FlytecBLEDevice::ParseFLYSEN(NMEAInputLine &line, NMEAInfo &info)
+FlytecBLEDevice::DataReceived(const void *_data, size_t length,
+                                    struct NMEAInfo &info)
 {
+  assert(_data != NULL);
+  assert(length > 0);
 
-  return true;
+  LogFormat("recv:");
+
+  bool result = false;
+
+  //const char *data = (const char *)_data, *end = data + length;
+  return result;
 }
+
 
 bool
 FlytecBLEDevice::ParseNMEA(const char *_line, NMEAInfo &info)
 {
-  LogFormat("ParseNMEA");
+  LogFormat("nmea:%s", _line);
+
   if (!VerifyNMEAChecksum(_line))
     return false;
 
@@ -74,7 +59,6 @@ FlytecBLEDevice::ParseNMEA(const char *_line, NMEAInfo &info)
   NMEAInputLine line(_line);
   char type[16];
   line.Read(type, 16);
-
   // check if we are in the correct Driver for this BLE Device
   if (StringIsEqual(type, "$BLEINFO")) {
 //    if (FlytecParseInfo(line)) {

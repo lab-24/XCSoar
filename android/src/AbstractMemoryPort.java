@@ -61,12 +61,10 @@ abstract class AbstractMemoryPort implements AndroidPort, InputListener {
 
 		sendStream = new PipedOutputStream();
 		receiveStream = new PipedInputStream();
-		inputStream = new PipedInputStream(sendStream, 2048);
+		inputStream = new PipedInputStream(sendStream, 4096);
 		outputStream = new PipedOutputStream(receiveStream);
 
 		receiveThread = new InputThread("mem" + _name, this, receiveStream);
-		sendThread = new OutputThread("mem" + _name, sendStream);
-		sendThread.setTimeout(5000);
 
 		inputThread = new InputThread(name, listener, inputStream);
 		outputThread = new OutputThread(name, outputStream);
@@ -78,6 +76,12 @@ abstract class AbstractMemoryPort implements AndroidPort, InputListener {
 		    return name;
 		  }
 	  
+	private synchronized OutputStream stealSendStream() {
+		PipedOutputStream o = sendStream;
+		sendStream = null;
+		return o;
+	}
+
 	private synchronized InputThread stealInputThread() {
 		InputThread i = inputThread;
 		inputThread = null;
@@ -96,24 +100,17 @@ abstract class AbstractMemoryPort implements AndroidPort, InputListener {
 		return r;
 	}
 
-	private synchronized OutputThread stealSendThread() {
-		OutputThread o = sendThread;
-		sendThread = null;
-		return o;
-	}
-
-	protected void setWriteTimeout(int timeout_ms) {
-		sendThread.setTimeout(timeout_ms);
-	}
 
 	@Override
 	public void close() {
 		OutputThread o = stealOutputThread();
 		if (o != null)
 			o.close();
-		OutputThread s = stealSendThread();
+		OutputStream s = stealSendStream();
 		if (s != null)
+			try {
 			s.close();
+			} catch (IOException ex) {}
 		InputThread i = stealInputThread();
 		if (i != null)
 			i.close();
@@ -148,8 +145,12 @@ abstract class AbstractMemoryPort implements AndroidPort, InputListener {
 	}
 
 	public int send(byte[] data, int length) {
-		OutputThread o = sendThread;
-		return o != null ? o.write(data, length) : -1;
+		try {
+			sendStream.write(data, 0, length);
+		} catch (IOException ex) {
+			return 0;
+		}
+		return length;
 	}
 
 	@Override

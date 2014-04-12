@@ -37,24 +37,16 @@ class NMEAInputLine;
 class FlytecBLEDevice : public AbstractDevice
 {
   Port &port;
-  fixed last_time;
-
-  bool parse;
 
 
 public:
-  FlytecBLEDevice(Port &_port):port(_port), last_time(fixed(0)), parse(false) {}
+  FlytecBLEDevice(Port &_port):port(_port) {}
 
   virtual bool ParseNMEA(const char *line, NMEAInfo &info) override;
+  virtual bool DataReceived(const void *data, size_t length,
+                            struct NMEAInfo &info) override;
 
-  bool ReadFlightList(RecordedFlightList &flight_list,
-                      OperationEnvironment &env) override;
 
-  bool DownloadFlight(const RecordedFlightInfo &flight, const TCHAR *path,
-                      OperationEnvironment &env) override;
-
-private:
-  bool ParseFLYSEN(NMEAInputLine &line, NMEAInfo &info);
 };
 
 #endif

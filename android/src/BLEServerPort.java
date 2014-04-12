@@ -78,7 +78,7 @@ final class BLEServerPort extends MultiPort implements InputListener {
 		            /* make writes non-blocking and potentially lossy, to avoid
 		            blocking when one of the peers doesn't receive quickly
 		            enough */
-		    		port.setWriteTimeout(0);
+		    		//port.setWriteTimeout(100);
 			    	add(port);
 		    	}
 		    } catch (IOException e) {

@@ -70,8 +70,7 @@ FLYTEC_SOURCES = \
 
 FLYTECBLE_SOURCES = \
         $(DRIVER_SRC_DIR)/FlytecBLE/Register.cpp \
-        $(DRIVER_SRC_DIR)/FlytecBLE/Parser.cpp \
-        $(DRIVER_SRC_DIR)/FlytecBLE/Logger.cpp
+        $(DRIVER_SRC_DIR)/FlytecBLE/Parser.cpp 
 
 VEGA_SOURCES = \
 	$(DRIVER_SRC_DIR)/Vega/Misc.cpp \

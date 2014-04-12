@@ -31,7 +31,7 @@ FlytecBLECreateOnPort(const DeviceConfig &config, Port &com_port)
 }
 
 const struct DeviceRegister flytec_ble_driver = {
-  _T("FlytecBLE"), _T("Flytec SensBox/7030"),
-  0,
+  _T("FlytecBLE"), _T("Flytec SensBox"),
+  0, // DeviceRegister::RAW_GPS_DATA | DeviceRegister::RECEIVE_SETTINGS,
   FlytecBLECreateOnPort,
 };
